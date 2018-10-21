@@ -1,22 +1,32 @@
+% Clear workspace
 close all;
 clear all;
 clc;
 
-Fsample = 1000;
-Tsample = 1/Fsample;
+% Sampling features
+SampleFrequency = 1000;
+SampleTime = 1/SampleFrequency;
 
-SampleNumber = 100;
+SampleNumber = 1000;
 
-SignalFrequency = 30;
+TimeVector = 0:1/SampleFrequency:SampleNumber*(1/SampleFrequency)-(1/SampleFrequency);
 
-t = 0:1/Fsample:SampleNumber*(1/Fsample)-(1/Fsample);
-y = 10*sin(2*pi*t*SignalFrequency);
+SignalTimeLength = length(TimeVector);
 
-n = length(t);
-f = (-n/2:n/2-1)*(Fsample/n);
-z = abs(fft(y)./n);
-z = fftshift(z);
+% Signal features
+Signal1Amplitude = 10;
+Signal1Frequency = 50;
 
-plot(t,y);
-figure;
-stem(f,z);
+Signal2Amplitude = 20;
+Signal2Frequency = 250;
+
+Signal = Signal1Amplitude*sin(2*pi*TimeVector*Signal1Frequency)+Signal2Amplitude*cos(2*pi*TimeVector*Signal2Frequency);
+
+FrequencyVector = (-SignalTimeLength/2:SignalTimeLength/2-1)*(SampleFrequency/SignalTimeLength);
+FFTOfSignal = fftshift(abs(fft(Signal)./SignalTimeLength));
+
+% Plot signal at time domain and frequency domain
+subplot(2,1,1);
+plot(TimeVector,Signal);
+subplot(2,1,2);
+stem(FrequencyVector,FFTOfSignal);
