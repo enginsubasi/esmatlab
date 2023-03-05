@@ -17,15 +17,7 @@ ht_ilaplace = matlabFunction(FT_time_domain_ilaplace);
 ht_simplify = matlabFunction(FT_time_domain_simplify);
 ht_collect = matlabFunction(FT_time_domain_collect);
 
-t=0:0.1:10;
-y_ilaplace=ht_ilaplace(t);
-y_simplify=ht_simplify(t);
-y_collect=ht_collect(t);
+t=0:1:100;
+y1=ht(t);
 
-figure;
-plot(t,y_ilaplace);
-hold on;
-plot(t,y_simplify);
-hold on;
-plot(t,y_collect);
-hold off;
+plot(y1);
