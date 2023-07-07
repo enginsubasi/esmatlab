@@ -6,7 +6,7 @@ mass = 1000;
 spring = 10;
 damper = 100;
 
-num = [1];
+num = [10];
 den = [mass,damper,spring];
 
 s = tf(num,den);

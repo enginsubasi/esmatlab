@@ -3,22 +3,30 @@ clear all;
 clc;
 
 num = [ 1, 0 ];
-den = [ 1, 2, 3 ];
+%den = [ 1, 2, 3 ];
+den = [ 1, -2, 6 ];
 
 numd = [ 1  -1 ];
 dend = [ 1  -1.85  0.9 ];
 
-ts = 1;
+ts = 0.1;
 
 s = tf ( num, den );
-sd = tf ( numd, dend, ts );
+sd = c2d(s,ts);
+%sd = tf ( numd, dend, ts );
 
-figure;
+subplot(2,2,1);
 step ( s );
-figure;
+subplot(2,2,2);
 impulse ( s );
 
-figure;
+subplot(2,2,3);
 step ( sd );
-figure;
+subplot(2,2,4);
 impulse ( sd );
+
+figure;
+subplot(2,1,1);
+pzplot ( s );
+subplot(2,1,2);
+pzplot ( sd );
